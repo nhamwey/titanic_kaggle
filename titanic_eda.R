@@ -5,9 +5,9 @@ library(dplyr)
 library(tidyr)
 
 #Read in data
-train <- fread(input = 'C:/Users/ndigi/Documents/R/Titanic/train.csv')
-test <- fread(input = 'C:/Users/ndigi/Documents/R/Titanic/test.csv')
-gender_thing <- fread(input = 'C:/Users/ndigi/Documents/R/Titanic/gender_submission.csv')
+train <- fread(input = 'train.csv')
+test <- fread(input = 'test.csv')
+gender_thing <- fread(input = 'gender_submission.csv')
 
 #Combine datasets, create solution column of NA's for test data
 test$Survived <- NA
