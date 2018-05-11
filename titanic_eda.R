@@ -1,4 +1,4 @@
-library('xgboost')
+library(xgboost)
 library(plotly)
 library(data.table)
 library(dplyr)
@@ -46,6 +46,8 @@ for(var in colnames(full)){
   
   plot_list[[var]] <- plot_ly(data = grouped_surv, x = grouped_surv[[var]],
                               y = grouped_surv$ave_Survived, type = 'scatter',
-                              marker=list(size=10))
+                              mode = 'markers',
+                              marker=list(size=10)) %>%
+                              layout(title = var)
 }
 plot_list
