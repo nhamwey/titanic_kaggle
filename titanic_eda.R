@@ -14,7 +14,7 @@ test$Survived <- NA
 full <- rbind(train, test)
 
 str(full)
-lapply(full, function(x) length(unique(x)))
+sapply(full, function(x) length(unique(x)))
 
 #Count NA values
 num_missing <- full %>%
@@ -51,3 +51,4 @@ for(var in colnames(full)){
                               layout(title = var)
 }
 plot_list
+

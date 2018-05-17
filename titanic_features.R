@@ -22,6 +22,29 @@ full$Fam_Size_Desc[between(full$Fam_Size, 1, 3)] <- 'Small'
 full$Fam_Size_Desc[between(full$Fam_Size, 4, 6)] <- 'Medium'
 full$Fam_Size_Desc[between(full$Fam_Size, 7, 20)] <- 'Large'
 
+#Age
+full <- full %>% mutate(
+    Age_grp = case_when(Age <= 10 ~ 'Youth',
+                        Age > 10 & Age <= 20 ~ 'Teen',
+                        Age > 20 & Age <= 55 ~ 'Adult',
+                        Age > 55 ~ 'Oldie')
+)
+
+#Fare
+full <- full %>% mutate(
+  Fare_grp = case_when(Fare < 8.54 ~ '0 - 8.54',
+                      Fare >= 8.54 & Fare < 51.2 ~ '8.54 - 51.2',
+                      Fare >= 51.2 & Fare < 59.8 ~ '51.2 - 59.8',
+                      Fare >= 59.8 & Fare < 76.8 ~ '59.8 - 76.8',
+                      Fare >= 76.8 ~ '76.8+')
+)
+
+
+#Scratch testing
+full$Fare_grp <- cut(full$Fare, breaks = 60, include.highest = F, include.lowest = T)
+
+fare_test <- full %>% group_by(Fare_grp) %>% summarise(Surv = mean(Survived, na.rm = T),
+                                                       obs = n())
 
 name_df <- data.frame(Name = full$Name,
                       Parch = full$Parch,
